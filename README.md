@@ -6,13 +6,13 @@
 
 <p align="center">
   <a href="https://github.com/MUYU-LU/Agentic-auto-designed-MLIPs">
-    <img src="https://img.shields.io/badge/repository-public-blue" alt="public repository">
+    <img src="https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub repository">
   </a>
   <a href="https://huggingface.co/datasets/DeerEyeRain/research_runtime">
-    <img src="https://img.shields.io/badge/runtime-Hugging%20Face-yellow" alt="runtime data on Hugging Face">
+    <img src="https://img.shields.io/badge/Hugging%20Face-Runtime%20Artifacts-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black" alt="runtime data on Hugging Face">
   </a>
-  <img src="https://img.shields.io/badge/domain-MLIP%20autoresearch-green" alt="MLIP autoresearch">
-  <img src="https://img.shields.io/badge/contents-skill%20contracts-lightgrey" alt="skill contracts">
+  <img src="https://img.shields.io/badge/Python-Tooling-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python tooling">
+  <img src="https://img.shields.io/badge/Skill-Contracts-4B5563?style=for-the-badge&logo=readthedocs&logoColor=white" alt="skill contracts">
 </p>
 
 AutoResearch-MLIP studies whether autonomous agents can perform auditable research on
@@ -29,6 +29,14 @@ This repository contains the two public skill bundles used to organize that proc
 Large runtime artifacts are hosted separately on Hugging Face:
 
 **Runtime dataset:** <https://huggingface.co/datasets/DeerEyeRain/research_runtime>
+
+## Entry points
+
+| Resource | Link |
+| --- | --- |
+| <img src="https://img.shields.io/badge/Skill-MLIP--Autoresearch-2E8B57?style=flat-square" alt="MLIP-Autoresearch"> | [`MLIP-Autoresearch/`](./MLIP-Autoresearch) |
+| <img src="https://img.shields.io/badge/Skill-MLIP--Evidence-1F77B4?style=flat-square" alt="MLIP-Evidence"> | [`MLIP-Evidence/`](./MLIP-Evidence) |
+| <img src="https://img.shields.io/badge/Data-research__runtime-FFB000?style=flat-square" alt="research_runtime"> | [Hugging Face runtime dataset](https://huggingface.co/datasets/DeerEyeRain/research_runtime) |
 
 ---
 
