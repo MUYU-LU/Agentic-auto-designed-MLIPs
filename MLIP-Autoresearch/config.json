@@ -1,0 +1,54 @@
+{
+  "runtime": "remote",
+  "conda_sh": "<LOCAL_CONDA_SH>",
+  "conda_env": "<LOCAL_CONDA_ENV>",
+  "local_python": "<LOCAL_PYTHON>",
+  "local_shell_kind": "conda_explicit",
+  "remote_conda_env": "<REMOTE_CONDA_ENV>",
+  "runtime_root": "<LOCAL_RUNTIME_ROOT>",
+  "remote": {
+    "host": "<REMOTE_HOST>",
+    "port": 22,
+    "user": "<REMOTE_USER>",
+    "password": null,
+    "password_note": "Do not commit credentials. Use SSH keys, ssh-agent, or a private local config.",
+    "workdir": "<REMOTE_WORKDIR>",
+    "runtime_root": "<REMOTE_RUNTIME_ROOT>"
+  },
+  "policies": {
+    "remote_smoke_datasets": [
+      "rmd17",
+      "mad10k"
+    ],
+    "remote_smoke_dataset": "rmd17",
+    "remote_smoke_epochs": 1,
+    "remote_smoke_max_samples": 1,
+    "default_batch_launch_epochs": 8,
+    "default_batch_launch_batch_size": 8,
+    "max_run_wallclock_sec": 43200,
+    "max_repair_attempts_per_unit": 2,
+    "max_same_failure_class_repairs": 1,
+    "max_poll_ticks_in_repair": 3,
+    "mad10k_force_grad_smoke_samples": 64
+  },
+  "selection": {
+    "strategy": "puct_lite",
+    "c_puct": 0.45,
+    "penalty_weight": 0.08,
+    "pattern_penalty_weight": 0.04,
+    "max_pattern_penalty": 0.12,
+    "negative_pattern_penalty": 0.08,
+    "recent_pattern_window": 6,
+    "pattern_overlap_threshold": 4,
+    "novel_family_prior_bonus": 0.2,
+    "positive_family_delta_scale": 1.0,
+    "max_family_delta_prior": 0.08,
+    "role_priors": {
+      "jump": 1.08,
+      "wildcard": 1.04,
+      "backward-simplify": 1.02,
+      "exploit": 1.0,
+      "control": 0.2
+    }
+  }
+}
