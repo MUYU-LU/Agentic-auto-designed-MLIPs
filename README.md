@@ -1,10 +1,38 @@
-# AutoResearch-MLIP: Agentic Auto-Designed MLIPs
+# AutoResearch-MLIP
 
-This repository contains the public skill bundles used by **AutoResearch-MLIP**, a skill-bounded autonomous research protocol for machine-learned interatomic potential (MLIP) design evolution.
+<p align="center">
+  <b>Skill-bounded autonomous design evolution for machine-learned interatomic potentials</b>
+</p>
 
-AutoResearch-MLIP treats MLIP development as an auditable closed loop: evidence is gathered from papers, repositories, and code audits; candidate designs are implemented as bounded code edits; fixed molecular and periodic-material assays evaluate runnable candidates; and failures, controls, and continuation decisions are recorded as part of the research state.
+<p align="center">
+  <a href="https://github.com/MUYU-LU/Agentic-auto-designed-MLIPs">
+    <img src="https://img.shields.io/badge/repository-public-blue" alt="public repository">
+  </a>
+  <a href="https://huggingface.co/datasets/DeerEyeRain/research_runtime">
+    <img src="https://img.shields.io/badge/runtime-Hugging%20Face-yellow" alt="runtime data on Hugging Face">
+  </a>
+  <img src="https://img.shields.io/badge/domain-MLIP%20autoresearch-green" alt="MLIP autoresearch">
+  <img src="https://img.shields.io/badge/contents-skill%20contracts-lightgrey" alt="skill contracts">
+</p>
 
-## Repository structure
+AutoResearch-MLIP studies whether autonomous agents can perform auditable research on
+machine-learned interatomic potentials (MLIPs), rather than only generating isolated
+candidate architectures.
+
+This repository contains the two public skill bundles used to organize that process:
+
+| Skill | Role |
+| --- | --- |
+| `MLIP-Autoresearch` | Bounds the research loop: candidate creation, implementation gates, evaluator interfaces, repair limits, continuation decisions and runtime records. |
+| `MLIP-Evidence` | Builds evidence packages from papers, repositories and code audits before proposals become executable MLIP trials. |
+
+Large runtime artifacts are hosted separately on Hugging Face:
+
+**Runtime dataset:** <https://huggingface.co/datasets/DeerEyeRain/research_runtime>
+
+---
+
+## What this repository contains
 
 ```text
 .
@@ -20,44 +48,85 @@ AutoResearch-MLIP treats MLIP development as an auditable closed loop: evidence 
     └── scripts/
 ```
 
-### `MLIP-Autoresearch`
+### MLIP-Autoresearch
 
-`MLIP-Autoresearch` is the outer-loop orchestration skill. It defines the runtime boundary for MLIP design evolution, including:
+`MLIP-Autoresearch` is the outer-loop research skill. It defines what the
+agent may do during MLIP design evolution and what remains outside agent
+control.
 
-- fixed evaluator and benchmark semantics;
-- source selection and continuation policy;
-- proposal, implementation, smoke-test, launch, collection, and repair gates;
-- terminal trial records, failure-memory records, and continuation records;
-- separation between the main orchestrating agent and bounded worker subagents.
+It covers:
 
-The included `config.json` is a public template. Fields such as `<LOCAL_RUNTIME_ROOT>`, `<REMOTE_HOST>`, `<REMOTE_USER>`, `<REMOTE_WORKDIR>`, and `<REMOTE_RUNTIME_ROOT>` must be replaced in a private local configuration before execution. Do not commit credentials or machine-specific paths.
+- generation-level trial orchestration;
+- allowed source-code edit surfaces;
+- smoke tests, remote launch, collection and repair gates;
+- fixed evaluator interfaces and assay semantics;
+- terminal trial records, failure-memory records and continuation records;
+- non-greedy continuation decisions that can preserve a best observed
+  candidate while expanding a diagnostically useful branch.
 
-### `MLIP-Evidence`
+The public `config.json` is a template with placeholders such as
+`<REMOTE_HOST>`, `<REMOTE_USER>`, `<REMOTE_WORKDIR>` and
+`<REMOTE_RUNTIME_ROOT>`. Replace these in a private local configuration
+before execution. Do not commit credentials or machine-specific paths.
 
-`MLIP-Evidence` is the evidence-gathering skill. It builds proposal-time evidence packages from:
+### MLIP-Evidence
 
-- local MLIP papers;
-- arXiv or web papers;
-- repository discovery and code-reading;
-- implementation-fit analysis;
-- design-evidence cards, patch blueprints, source plans, and compact briefs.
+`MLIP-Evidence` is the evidence skill. It prepares proposal-time research
+context from:
 
-This skill is evidence-only. It does not edit runnable units, launch benchmarks, choose continuation sources, or redefine evaluator semantics.
+- local or web-accessible MLIP papers;
+- repository discovery and source-code reading;
+- mechanism cards;
+- patch blueprints;
+- implementation-fit checks;
+- compact evidence briefs for proposal writing.
 
-## Runtime data
+This skill is evidence-only. It does not edit runnable MLIP units, launch
+benchmarks, choose continuation sources or redefine evaluator metrics.
 
-The runtime ledger, evaluated trial records, generation reports, continuation records, source snapshots, failure-memory records, and other large audit artifacts are hosted separately on Hugging Face:
+---
 
-**Dataset:** https://huggingface.co/datasets/DeerEyeRain/research_runtime
+## Runtime artifacts
 
-The Hugging Face dataset is the external artifact location for the research runtime rather than a lightweight tabular dataset. Some files are structured logs, JSON/JSONL records, source snapshots, or runtime artifacts, so the Hugging Face dataset viewer may not render all files as tables.
+The full research runtime is not stored in this GitHub repository because it
+contains large logs, source snapshots and generation-level records. The
+runtime artifact bundle is available here:
 
-## How to use
+<https://huggingface.co/datasets/DeerEyeRain/research_runtime>
 
-1. Clone this repository.
-2. Copy the relevant skill directory into your local agent/skill environment.
-3. Create a private runtime configuration from `MLIP-Autoresearch/config.json` by replacing placeholder paths and credentials.
-4. Set local environment variables where needed, for example:
+It includes, depending on release state:
+
+- evaluated trial records;
+- generation reports;
+- continuation decisions;
+- failure-memory and partial-positive records;
+- source snapshots or diffs;
+- assay summaries;
+- figure and manuscript-support tables.
+
+The Hugging Face dataset is an artifact store rather than a simple tabular
+dataset. Some records are JSON, JSONL, source snapshots or runtime logs, so
+the dataset viewer may not render every file as a table.
+
+---
+
+## Quick start
+
+Clone the repository:
+
+```bash
+git clone https://github.com/MUYU-LU/Agentic-auto-designed-MLIPs.git
+cd Agentic-auto-designed-MLIPs
+```
+
+Copy the skills into your agent environment, or point your agent runtime to
+the two skill folders directly.
+
+Create a private runtime configuration from `MLIP-Autoresearch/config.json`.
+At minimum, replace placeholder values for local workspace paths, remote
+execution paths and runtime artifact locations.
+
+Example environment variables:
 
 ```bash
 export OPENCLAW_WORKSPACE=/path/to/workspace
@@ -66,24 +135,45 @@ export MLIP_MAD10K_RAW_DIR=/path/to/mad10k/raw
 export MLIP_EVIDENCE_REPO_CACHE=/path/to/repo/cache
 ```
 
-5. Use `MLIP-Evidence` to build evidence packages and `MLIP-Autoresearch` to orchestrate bounded candidate implementation, evaluation, and continuation.
+Typical workflow:
 
-## Privacy and release notes
+1. Use `MLIP-Evidence` to create an evidence package for the current source.
+2. Use `MLIP-Autoresearch` to materialize bounded MLIP candidate edits.
+3. Run smoke tests and fixed assays through the configured evaluator.
+4. Collect terminal records and failure-memory records.
+5. Apply the continuation policy to choose the next research source.
 
-The public skill bundles use placeholders for private machine paths, remote hosts, usernames, work directories, and credentials. The repository should not contain:
+---
 
-- passwords or API keys;
-- private SSH keys;
-- local user paths such as `/home/<user>` or Windows desktop paths;
-- machine-specific runtime roots;
-- compiled Python caches.
+## Release and privacy notes
 
-Before redistributing modified versions, re-run a secret/path scan and remove `__pycache__/` directories.
+The public skill bundles intentionally use placeholders for private paths,
+remote hosts, usernames, work directories and credentials.
+
+Before publishing derived versions, check that the repository does not
+contain:
+
+- passwords, API keys or tokens;
+- SSH keys or private cluster credentials;
+- personal machine paths;
+- private runtime roots;
+- compiled Python caches such as `__pycache__/` or `.pyc` files;
+- redistributed third-party datasets or source caches without permission.
+
+The large `research_runtime` artifact bundle should also be reviewed before
+public release if it contains local paths, third-party source mirrors or
+private execution metadata.
+
+---
 
 ## Citation
 
-If you use this repository, please cite the associated AutoResearch-MLIP manuscript when available.
+If you use these skill bundles or runtime artifacts, please cite the
+associated AutoResearch-MLIP manuscript when available.
+
+---
 
 ## License
 
-A license file has not yet been added. Until a license is specified, reuse is restricted by default copyright terms.
+No license file has been added yet. Until a license is specified, reuse is
+restricted by default copyright terms.
